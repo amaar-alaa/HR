@@ -1,0 +1,22 @@
+{% extends "../base.html" %}
+
+{% load crispy_forms_tags %}
+{% block title %}Edit Report  {% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <a href="{% url 'repo_list' %}"><h4 ><i class="mdi mdi-home menu-icon"></i> Back To Home </h4></a>
+    <form method="POST" class="form-horizontal" action="{% url 'repo_update' product.id %}" >
+        {% csrf_token %}
+        
+
+       {{form|crispy}}
+
+           
+
+       <button type="submit" class="btn btn-success">SUBMIT</button>
+
+    </form>
+</div>
+{% endblock%}

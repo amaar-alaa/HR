@@ -1,0 +1,23 @@
+{% extends '../base.html' %}
+
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <form method="POST" class="form-horizontal" action="{% url 'depart_update' depart.id %}">
+        {% csrf_token %}
+
+        <div class="form-row">
+            <div class="form-group col-md-7 mb-0">
+                {{ form|crispy }}
+            </div>
+           
+        <div class="form-row">
+            <div class="form-group col-md-6 pt-4">
+                <input type="submit" value="Update" class="btn btn-gradient-info btn-icon-text" />
+            </div>
+
+    </form>
+</div>
+{% endblock %}

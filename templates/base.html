@@ -1,0 +1,72 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/vendor.bundle.base.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+
+</head>
+
+<body>
+    <div class="container-scroller">
+        {% include 'part/_navbar.html' %}
+        <div class="container-fluid page-body-wrapper">
+            {% include 'part/_sidebar.html' %}
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    {% include 'part/message.html' %}
+
+
+                    {% block content %}
+
+                    {% endblock %}
+
+                </div>
+                {% include 'part/_footer.html' %}
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+
+    </script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js" defer></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+
+
+    <script src="{% static 'js/vendor.bundle.base.js' %}"></script>
+    <script src="{% static 'js/Chart.min.js' %}"></script>
+    <script src="{% static 'js/off-canvas.js' %}"></script>
+    <script src="{% static 'js/hoverable-collapse.js' %}"></script>
+    <script src="{% static 'js/misc.js' %}"></script>
+    <script src="{% static 'js/dashboard.js' %}"></script>
+    <script src="{% static 'js/todolist.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+{% extends "../base.html" %}
+
+{% load crispy_forms_tags %}
+{% block title %}Create {% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+    <div>
+    <h4>Create department</h4>
+    </div>
+    <div>
+    <form method="POST" class="form-horizontal pt-3" action="{% url 'depart_create' %}" enctype='multipart/form-data'>
+        {% csrf_token %}
+
+       
+        <div class="form-row">
+            <div class="form-group col-md-5 mb-0">
+                {{ form|crispy}}
+            </div>
+       
+        <div class="form-row"> 
+            <div class="form-group col-md-6 pt-4">
+                <input type="submit" value="Create" class="btn btn-success" name="save" />
+            </div>
+          </div> 
+             
+    </form>
+</div>
+<div class="card">
+    <div class="card-body">
+
+
+    <table class="table table-striped table-bordered   ">
+        <thead>
+            <tr>
+                <th>
+                    NO.
+                </th>
+                <th>
+                    Department
+                </th>
+                <th>
+                    Delete 
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dep in depart %}
+            <tr>
+                <td>{{dep.id }}</td>
+                <td><a href="{% url 'depart_edit' dep.id %}">{{dep.name}}</a></td>
+                <td><a href="{% url 'depart_delete' dep.id %}" onclick="return confirm('warning:if delete this department you will remove all Products have this department');"><i class="mdi mdi-delete-forever" style="color: red;"></i></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>  
+  </div>
+</div>
+</div>
+{% endblock%}

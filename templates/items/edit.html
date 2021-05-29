@@ -1,0 +1,50 @@
+{% extends '../base.html' %}
+
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <form method="POST" class="form-horizontal" action="/update/{{product.id}}" enctype='multipart/form-data'>
+        {% csrf_token %}
+
+
+    
+        <div class="form-row">
+            <div class="form-group col-md-6 mb-0">
+                {{ form.name|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.image|as_crispy_field }}
+            </div>
+
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6 mb-0">
+                {{ form.unit|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.depart|as_crispy_field }}
+            </div>
+
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4 mb-0">
+                {{ form.cost|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-0">
+                {{ form.selling|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-0">
+                {{form.curency|as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6 mb-0">
+                {{ form.desc|as_crispy_field }}
+                <input type="submit" value="Update" class="btn btn-gradient-info btn-icon-text" />
+            </div>
+
+    </form>
+</div>
+{% endblock %}

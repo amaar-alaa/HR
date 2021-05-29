@@ -1,0 +1,40 @@
+{% extends '../base.html' %}
+
+
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-5 grid-margin stretch-card">
+   
+        <div class="col-md-10 mt-1 left">
+            <a href="{% url 'repo_create' %}">
+                <h4><i class="mdi mdi-folder-plus"></i> Add Report </h4>
+            </a>
+            {% for post in repo_list %}
+            {% if post.author == user.username or user.username == 'admin' %}
+            <div class="card mb-3">
+                <div class="card-body">
+
+                    <h1 class="card-title"><a href="{% url 'repo_detail' post.id %}">
+                            <span style="font-size: 25px;">{{ post.title }}</span></a>
+                            {% if post.author == user.username %}
+                        <a href="{% url 'repo_edit' post.id  %}">
+                            <i class="mdi mdi-border-color" style="color: blueviolet;"></i></a>
+                            {% endif %}
+                    </h1>
+                    <p class="card-text text-muted h6"><span style="color: rgb(255, 0, 234); font-size: 20px;">
+                        {{post.author }}</span> | {{ post.created_on}} </p>
+                    <p class="card-text">{{post.content|slice:":50" }}</p>
+
+
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    {% include '../todo/todolist.html' %}
+</div>
+
+{% endblock %}

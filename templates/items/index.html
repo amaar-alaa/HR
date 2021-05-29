@@ -1,0 +1,101 @@
+{% extends "../base.html" %}
+{% load mathfilters %}
+
+{% load crispy_forms_tags %}
+{% block title %}Index {% endblock %}
+
+{% block content %}
+
+<div class="row">
+   
+    <div >
+
+        <form action="/update_curn/{{curn.id}}" method="POST">
+            {% csrf_token %}
+
+
+            <table>
+                <th>{{form|crispy}}</th>
+                <th><input type="submit" class="btn btn-outline-success"></th>
+            </table>
+
+        </form>
+
+
+
+        <div class="card">
+             <div>
+            <a href="/create">
+               
+                <h6>Add New Product <i class="mdi mdi-bookmark-plus"></i></h6>
+            </div>
+        </a>
+            <table id="myTable" class="table table-striped table-bordered table-hover bg-transparent" style="width:100%">
+                <thead>
+                    <tr style="color: rgb(223, 57, 245);font-size: 50px;">
+                        <th>Name</th>
+                        <th>Cost</th>
+                        <th>Selling</th>
+                        <th>Prof</th>
+                        <th>Curency <i class="mdi mdi-cached"></i></th>
+                        <th>Unit</th>
+                        <th>Depart</th>
+                        <th><i class="mdi mdi-file-image"></i></th>
+                        <th><i class="mdi mdi-briefcase"> </i></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td> <a href="{% url 'item_details' product.id %}">{{product.name}}</a></td>
+                        {% if product.curency == "iq" %}
+                        <td>{{product.cost}} د</td>
+                        <td>{{product.selling}} د</td>
+                        <td>{{ product.selling|sub:product.cost }} د</td>
+                        <td>{{product.selling|div:curn.value|stringformat:".2f"}} $</td>
+                        {% else %}
+                        <td>{{product.cost}} $</td>
+                        <td>{{product.selling}} $</td>
+                        <td>{{ product.selling|sub:product.cost }} $</td>
+                        <td>{{product.selling|mul:curn.value}} د</td>
+                        {% endif %}
+
+                        <td>{{product.unit}}</td>
+                        <td>{{product.depart}}</td>
+                        {% if product.image %}
+                        <td>
+
+
+                            <a href="{{product.image.url}}">
+                                <img src="{{product.image.url}}" alt="product" width="50" height="50">
+                        </td>
+                        </a>
+
+                        {% endif %}
+
+                        <td>
+
+
+
+                           <a href="{% url 'item_edit' product.id %}"><i class="mdi mdi-pencil"></i>|</a> <a style="color: red;" href="/delete/{{ product.id }}"
+                                onclick="return confirm('Are you sure you want to delete this item?');"><span><i
+                                        class="mdi mdi-delete-forever"></i></span></a>
+
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock%}

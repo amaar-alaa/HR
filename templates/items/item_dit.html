@@ -1,0 +1,44 @@
+{% extends '../base.html' %}
+
+
+
+
+{% block content %}
+
+<a href="{% url 'index' %}"><h4 ><i class="mdi mdi-home menu-icon "></i> Back To Home </h4></a>
+<div class="row" >
+  <div class="col-md-5 grid-margin stretch-card ">
+<div class="card" style="width: 25rem;">
+   
+    <div class="card-body">
+      <h5 class="card-title">{{ product.name }}</h5>
+      <p class="card-text">{{ product.desc }}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      {% if product.curency == '$' %}  
+      <li class="list-group-item">Cost : {{ product.cost }} $ </li>
+      <li class="list-group-item">selling : {{ product.decs }} $</li>
+      {% else %}
+      <li class="list-group-item">Cost : {{ product.cost }} د </li>
+      <li class="list-group-item">Selling : {{ product.decs }} د </li>
+    {% endif %}
+    <li class="list-group-item">Depart: {{ product.depart }} </li>
+    <li class="list-group-item">Unit : {{ product.unit }} </li>
+
+    </ul>
+    <div class="card-body">
+      <a href="{% url 'item_edit' product.id %}" class="card-link">Edit </a>
+      <a href="{% url 'item_delete' product.id %}" style="color: red;" class="card-link">Delete</a>
+    </div>
+  </div>
+</div>  
+<div class="col-md-6">
+    <div class="card bg-secondary" >
+        <div class="card-body ">
+        
+        <img class="card-img" src="{{ product.image.url }}" alt="Card image cap">
+    </div>
+</div></div>
+
+</div>
+{% endblock %}
